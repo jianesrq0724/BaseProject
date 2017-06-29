@@ -2,7 +2,9 @@ package com.ruiqin.baseproject;
 
 import android.app.Application;
 import android.content.Context;
+import android.support.multidex.MultiDex;
 
+import com.blankj.utilcode.util.Utils;
 import com.ruiqin.baseproject.greendao.gen.DaoMaster;
 import com.ruiqin.baseproject.greendao.gen.DaoSession;
 
@@ -16,12 +18,20 @@ public class App extends Application {
     private static Context mContext;
     private static App app;
     private DaoSession daoSession;
+    public static String mobileNum;
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        MultiDex.install(base);
+    }
 
     @Override
     public void onCreate() {
         super.onCreate();
-        mContext = getApplicationContext();
         app = this;
+        mContext = getApplicationContext();
+        Utils.init(mContext);
 
         /**
          * 初始化数据库
@@ -31,7 +41,7 @@ public class App extends Application {
         daoSession = new DaoMaster(writableDb).newSession();
     }
 
-    protected static final Context getContext() {
+    public static final Context getContext() {
         return mContext;
     }
 
@@ -39,5 +49,4 @@ public class App extends Application {
         return app;
     }
 
-//    public static
 }
