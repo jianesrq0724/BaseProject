@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
+import com.ruiqin.baseproject.util.InstanceUtil;
+
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
@@ -12,9 +14,10 @@ import butterknife.Unbinder;
  * Created by Ruiqin on 2017/6/26.
  */
 
-public abstract class BaseActivity extends AppCompatActivity {
+public abstract class BaseActivity<P extends BasePresenter, M extends BaseModel> extends AppCompatActivity {
     private Unbinder mBind;
     public Context mContext;
+    public P mPresenter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -22,6 +25,10 @@ public abstract class BaseActivity extends AppCompatActivity {
         setContentView(getLayoutId());
         mContext = this;
         mBind = ButterKnife.bind(this);
+        if (this instanceof BaseView) {
+            mPresenter = InstanceUtil.getInstance(this, 0);
+            mPresenter.setVM(this, InstanceUtil.getInstance(this, 1));
+        }
         initView(savedInstanceState);
     }
 
