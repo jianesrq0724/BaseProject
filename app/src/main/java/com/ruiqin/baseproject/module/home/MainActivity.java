@@ -38,4 +38,17 @@ public class MainActivity extends BaseActivity<MainPresenter, MainModel> impleme
         mToolbarTitle.setText("test");
         return true;
     }
+
+    private long lastClickTime;
+
+    @Override
+    public void onBackPressed() {
+        long currentClickTime = System.currentTimeMillis();
+        if (currentClickTime - lastClickTime > 2000) {
+            ToastUtils.showShort("再按一次退出");
+            lastClickTime = currentClickTime;
+        } else {
+            super.onBackPressed();
+        }
+    }
 }
