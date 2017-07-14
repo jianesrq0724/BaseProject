@@ -13,7 +13,6 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
-
 import com.ruiqin.baseproject.R;
 import com.ruiqin.baseproject.util.InstanceUtil;
 
