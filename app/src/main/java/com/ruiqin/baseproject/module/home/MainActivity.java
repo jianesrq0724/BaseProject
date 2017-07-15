@@ -2,13 +2,20 @@ package com.ruiqin.baseproject.module.home;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 
 import com.ruiqin.baseproject.R;
 import com.ruiqin.baseproject.base.BaseActivity;
 import com.ruiqin.baseproject.module.BlankFragment;
+import com.ruiqin.baseproject.module.home.adapter.MainRecyclerAdapter;
 import com.ruiqin.baseproject.util.ToastUtils;
 
+import butterknife.BindView;
+
 public class MainActivity extends BaseActivity<MainPresenter, MainModel> implements MainContract.View {
+    @BindView(R.id.recyclerView)
+    RecyclerView mRecyclerView;
 
     @Override
     protected int getFragmentId() {
@@ -20,23 +27,13 @@ public class MainActivity extends BaseActivity<MainPresenter, MainModel> impleme
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         addFragment(new BlankFragment());
-        mPresenter.testjudge(2);
-    }
-
-    @Override
-    public void testSuccess() {
-        ToastUtils.showShort("大于0");
-    }
-
-    @Override
-    public void textFail() {
-        ToastUtils.showShort("小于0");
+        mPresenter.setAdapter();
     }
 
     @Override
     public boolean canBack() {
-        mToolbarTitle.setText("test");
-        return true;
+        mToolbarTitle.setText("BaseProject");
+        return false;
     }
 
     private long lastClickTime;
@@ -50,5 +47,11 @@ public class MainActivity extends BaseActivity<MainPresenter, MainModel> impleme
         } else {
             super.onBackPressed();
         }
+    }
+
+    @Override
+    public void setRecyclerAdapterSuccess(MainRecyclerAdapter mainRecyclerAdapter) {
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));//这里用线性显示 类似于listview
+        mRecyclerView.setAdapter(mainRecyclerAdapter);
     }
 }
