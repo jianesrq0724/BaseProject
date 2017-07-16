@@ -2,6 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="com.ruiqin.baseproject">
 
+    <uses-permission android:name="android.permission.CALL_PHONE"/>
+    <!-- 请求网络 -->
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:name=".App"
         android:allowBackup="true"
