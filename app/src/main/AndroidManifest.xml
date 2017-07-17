@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.ruiqin.baseproject">
+    package="com.ruiqin.baseproject">
+
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <!-- 请求网络 -->
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name=".App"
@@ -14,12 +18,18 @@
             android:name=".module.home.MainActivity"
             android:screenOrientation="portrait">
             <intent-filter>
+<<<<<<< HEAD
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
+=======
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+>>>>>>> remotes/origin/develop
             </intent-filter>
         </activity>
-        <activity android:name=".module.test.TestActivity">
-        </activity>
+        <activity android:name=".module.test.TestActivity" />
+        <activity android:name=".commonality.browse.x5webview.X5WebViewBrowseActivity" />
     </application>
 
 </manifest>
