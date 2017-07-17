@@ -45,11 +45,8 @@ public class App extends Application {
         Database writableDb = devOpenHelper.getWritableDb();
         daoSession = new DaoMaster(writableDb).newSession();
 
-<<<<<<<HEAD
         initCrashHandler();
-=======
         initX5Environment();//x5内核初始化接口
->>>>>>> remotes/origin/develop
     }
 
     /**
