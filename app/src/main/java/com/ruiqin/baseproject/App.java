@@ -5,6 +5,7 @@ import android.content.Context;
 import android.support.multidex.MultiDex;
 
 import com.blankj.utilcode.util.Utils;
+import com.ruiqin.baseproject.crash.CrashHandler;
 import com.ruiqin.baseproject.greendao.gen.DaoMaster;
 import com.ruiqin.baseproject.greendao.gen.DaoSession;
 
@@ -39,6 +40,8 @@ public class App extends Application {
         DaoMaster.DevOpenHelper devOpenHelper = new DaoMaster.DevOpenHelper(mContext, "test-db");
         Database writableDb = devOpenHelper.getWritableDb();
         daoSession = new DaoMaster(writableDb).newSession();
+
+        initCrashHandler();
     }
 
     public static final Context getContext() {
@@ -47,6 +50,12 @@ public class App extends Application {
 
     public static final App getApp() {
         return app;
+    }
+
+    private void initCrashHandler() {
+        //设置该CrashHandler为程序的默认处理器
+        CrashHandler crashHandler = CrashHandler.getInstance();
+        crashHandler.init(this);
     }
 
 }
