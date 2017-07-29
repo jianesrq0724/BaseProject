@@ -125,10 +125,9 @@ public class X5WebViewBrowseActivity extends BaseActivity {
     }
 
     @Override
-    protected int getFragmentId() {
+    protected int getFragmentContentId() {
         return 0;
     }
-
 
     /**
      * 延时初始化webView

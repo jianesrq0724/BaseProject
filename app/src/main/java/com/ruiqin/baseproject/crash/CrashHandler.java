@@ -12,7 +12,7 @@ import android.os.Environment;
 import android.util.Log;
 
 import com.blankj.utilcode.util.AppUtils;
-import com.ruiqin.baseproject.App;
+import com.ruiqin.baseproject.MyApplication;
 import com.ruiqin.baseproject.module.home.MainActivity;
 
 import java.io.BufferedWriter;
@@ -88,9 +88,9 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
      * 重启应用
      */
     private void restartApp() {
-        Intent intent = new Intent(App.getContext(), MainActivity.class);
-        PendingIntent restartIntent = PendingIntent.getActivity(App.getContext(), 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);//退出程序
-        AlarmManager mgr = (AlarmManager) App.getContext().getSystemService(Context.ALARM_SERVICE);
+        Intent intent = new Intent(MyApplication.getContext(), MainActivity.class);
+        PendingIntent restartIntent = PendingIntent.getActivity(MyApplication.getContext(), 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);//退出程序
+        AlarmManager mgr = (AlarmManager) MyApplication.getContext().getSystemService(Context.ALARM_SERVICE);
         mgr.set(AlarmManager.RTC, System.currentTimeMillis(), restartIntent); // 重启应用
     }
 
@@ -131,7 +131,7 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
         //应用的版本名称和版本号
         PackageManager pm = mContext.getPackageManager();
         PackageInfo pi = pm.getPackageInfo(mContext.getPackageName(), PackageManager.GET_ACTIVITIES);
-        pw.print("App Version: ");
+        pw.print("MyApplication Version: ");
         pw.print(pi.versionName);
         pw.print('_');
         pw.println(pi.versionCode);

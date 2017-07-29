@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 
-import com.ruiqin.baseproject.App;
+import com.ruiqin.baseproject.MyApplication;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -37,7 +37,7 @@ public class SPUtils {
     }
 
     private SPUtils(String spName) {
-        sp = App.getContext().getSharedPreferences(spName, Context.MODE_PRIVATE);
+        sp = MyApplication.getContext().getSharedPreferences(spName, Context.MODE_PRIVATE);
     }
 
     /**

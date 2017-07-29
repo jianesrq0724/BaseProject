@@ -2,7 +2,7 @@ package com.ruiqin.baseproject.util;
 
 import android.widget.Toast;
 
-import com.ruiqin.baseproject.App;
+import com.ruiqin.baseproject.MyApplication;
 
 /**
  * Created by ruiqin.shen
@@ -40,7 +40,7 @@ public final class ToastUtils {
      */
     private static void show(CharSequence text, int duration) {
         if (sToast == null) {
-            sToast = Toast.makeText(App.getContext(), text, duration);
+            sToast = Toast.makeText(MyApplication.getContext(), text, duration);
         } else {
             sToast.setText(text);
         }

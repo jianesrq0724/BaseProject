@@ -5,7 +5,7 @@ import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
 
-import com.ruiqin.baseproject.App;
+import com.ruiqin.baseproject.MyApplication;
 import com.ruiqin.baseproject.R;
 
 
@@ -25,7 +25,7 @@ public class SpanUtils {
         for (int i = 0; i < redTipFonts.length; i++) {
             int startIndex = content.lastIndexOf(redTipFonts[i]);
             int endIndex = startIndex + redTipFonts[i].length();
-            spannableString.setSpan(new ForegroundColorSpan(ContextCompat.getColor(App.getContext(), R.color.text_red)), startIndex, endIndex, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            spannableString.setSpan(new ForegroundColorSpan(ContextCompat.getColor(MyApplication.getContext(), R.color.text_red)), startIndex, endIndex, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         }
         return spannableString;
     }

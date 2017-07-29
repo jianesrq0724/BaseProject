@@ -18,7 +18,7 @@ public class MainActivity extends BaseActivity<MainPresenter, MainModel> impleme
     RecyclerView mRecyclerView;
 
     @Override
-    protected int getFragmentId() {
+    protected int getFragmentContentId() {
         return R.id.fragment;
     }
 

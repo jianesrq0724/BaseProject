@@ -13,16 +13,15 @@ import com.tencent.smtt.sdk.QbSdk;
 
 import org.greenrobot.greendao.database.Database;
 
-import retrofit2.http.HEAD;
-
 /**
  * Created by Ruiqin on 2017/6/26.
  */
 
-public class App extends Application {
+public class MyApplication extends Application {
     private static Context mContext;
-    private static App app;
+    private static MyApplication myApplication;
     private DaoSession daoSession;
+    public static String token;//用户token
     public static String mobileNum;
 
     @Override
@@ -34,7 +33,7 @@ public class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        app = this;
+        myApplication = this;
         mContext = getApplicationContext();
         Utils.init(mContext);
 
@@ -58,7 +57,7 @@ public class App extends Application {
             @Override
             public void onViewInitFinished(boolean arg0) {
                 //x5內核初始化完成的回调，为true表示x5内核加载成功，否则表示x5内核加载失败，会自动切换到系统内核。
-                LogUtils.e("app", " onViewInitFinished is " + arg0);
+                LogUtils.e("myApplication", " onViewInitFinished is " + arg0);
             }
 
             @Override
@@ -74,8 +73,8 @@ public class App extends Application {
         return mContext;
     }
 
-    public static final App getApp() {
-        return app;
+    public static final MyApplication getMyApplication() {
+        return myApplication;
     }
 
     private void initCrashHandler() {

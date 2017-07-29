@@ -5,7 +5,7 @@ import android.content.ClipboardManager;
 import android.content.Context;
 
 import com.blankj.utilcode.util.Utils;
-import com.ruiqin.baseproject.App;
+import com.ruiqin.baseproject.MyApplication;
 
 
 /**
@@ -15,7 +15,7 @@ import com.ruiqin.baseproject.App;
 
 public class ClipboardUtils {
     public static void copyText(CharSequence text) {
-        ClipboardManager clipboardManager = (ClipboardManager) App.getContext().getSystemService(Context.CLIPBOARD_SERVICE);
+        ClipboardManager clipboardManager = (ClipboardManager) MyApplication.getContext().getSystemService(Context.CLIPBOARD_SERVICE);
         clipboardManager.setPrimaryClip(ClipData.newPlainText("text", text));
     }
 

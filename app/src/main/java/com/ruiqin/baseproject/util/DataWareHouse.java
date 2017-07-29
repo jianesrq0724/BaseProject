@@ -1,6 +1,10 @@
 package com.ruiqin.baseproject.util;
 
-import com.ruiqin.baseproject.App;
+
+import com.blankj.utilcode.util.StringUtils;
+import com.ruiqin.baseproject.MyApplication;
+
+import static com.ruiqin.baseproject.constant.Constant.SP_TOKEN;
 
 /**
  * Created by ruiqin.shen
@@ -15,14 +19,34 @@ public class DataWareHouse {
      * @param mobileNum
      */
     public static void setMobileNum(String mobileNum) {
-        App.mobileNum = mobileNum;
+        MyApplication.mobileNum = mobileNum;
     }
 
     /**
      * 获取手机号码
      */
     public static String getMobileNum() {
-        return App.mobileNum;
+        return MyApplication.mobileNum;
+    }
+
+
+    /**
+     * 保存用户token ，登陆成功之后保存
+     */
+    public static void setToken(String token) {
+        MyApplication.token = token;
+        SPUtils.getInstance().put(SP_TOKEN, token);
+    }
+
+    /**
+     * 获取用户token
+     */
+    public static String getToken() {
+        if (!StringUtils.isEmpty(MyApplication.token)) {
+            return MyApplication.token;
+        } else {
+            return SPUtils.getInstance().getString(SP_TOKEN);
+        }
     }
 
 }

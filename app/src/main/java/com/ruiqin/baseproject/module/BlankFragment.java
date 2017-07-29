@@ -8,6 +8,16 @@ import com.ruiqin.baseproject.base.BaseFragment;
 
 public class BlankFragment extends BaseFragment {
     @Override
+    protected void lazyLoad() {
+
+    }
+
+    @Override
+    protected void stopLoad() {
+
+    }
+
+    @Override
     protected void initView(View view, Bundle savedInstanceState) {
         
     }
