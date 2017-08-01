@@ -2,11 +2,16 @@ package com.ruiqin.baseproject.network;
 
 import com.blankj.utilcode.util.AppUtils;
 import com.blankj.utilcode.util.StringUtils;
+import com.ruiqin.baseproject.constant.NetWorkState;
+import com.ruiqin.baseproject.network.entity.HttpResult;
 import com.ruiqin.baseproject.util.DataWareHouse;
+import com.ruiqin.baseproject.util.ToastUtils;
 
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
+import io.reactivex.annotations.NonNull;
+import io.reactivex.functions.Function;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -88,6 +93,22 @@ public class HttpClient {
             return chain.proceed(request);
         }
     };
+
+    /**
+     * 利用RxJava的map方法，统一对数据进行匹配
+     *
+     * @param <T>
+     */
+    public static class HttpResultFunc<T> implements Function<HttpResult<T>, T> {
+        @Override
+        public T apply(@NonNull HttpResult<T> tHttpResult) throws Exception {
+            if (tHttpResult.getStatus() != NetWorkState.SUCCEES) {
+                ToastUtils.showShort(tHttpResult.getMessage());
+                throw new ApiException();
+            }
+            return tHttpResult.getResult();
+        }
+    }
 
 
 }

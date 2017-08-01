@@ -19,11 +19,14 @@
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
+
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
         <activity android:name=".module.test.TestActivity"/>
         <activity android:name=".commonality.browse.x5webview.X5WebViewBrowseActivity"/>
+        <activity android:name=".crash.TestActivity">
+        </activity>
     </application>
 
 </manifest>

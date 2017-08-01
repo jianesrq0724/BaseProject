@@ -37,7 +37,7 @@ public class SPUtils {
     }
 
     private SPUtils(String spName) {
-        sp = MyApplication.getContext().getSharedPreferences(spName, Context.MODE_PRIVATE);
+        sp = MyApplication.getAppContext().getSharedPreferences(spName, Context.MODE_PRIVATE);
     }
 
     /**

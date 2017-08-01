@@ -19,7 +19,6 @@ import org.greenrobot.greendao.database.Database;
 
 public class MyApplication extends Application {
     private static Context mContext;
-    private static MyApplication myApplication;
     private DaoSession daoSession;
     public static String token;//用户token
     public static String mobileNum;
@@ -33,7 +32,6 @@ public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        myApplication = this;
         mContext = getApplicationContext();
         Utils.init(mContext);
 
@@ -68,13 +66,11 @@ public class MyApplication extends Application {
         QbSdk.initX5Environment(getApplicationContext(), cb);
     }
 
-
-    public static final Context getContext() {
+    /**
+     * 获得上下文
+     */
+    public static Context getAppContext() {
         return mContext;
-    }
-
-    public static final MyApplication getMyApplication() {
-        return myApplication;
     }
 
     private void initCrashHandler() {

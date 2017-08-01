@@ -11,9 +11,9 @@ import android.os.Build;
 import android.os.Environment;
 import android.util.Log;
 
-import com.blankj.utilcode.util.AppUtils;
 import com.ruiqin.baseproject.MyApplication;
 import com.ruiqin.baseproject.module.home.MainActivity;
+import com.ruiqin.baseproject.network.HttpClient;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -23,15 +23,15 @@ import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+
 /**
  * Created by ruiqin.shen
  * 类说明：
  */
 public class CrashHandler implements Thread.UncaughtExceptionHandler {
     private static final String TAG = "CrashHandler";
-    private static final boolean DEBUG = true;
 
-    private static final String PATH = Environment.getExternalStorageDirectory().getPath() + "/" + AppUtils.getAppPackageName() + "/log/";
+    private static final String PATH = Environment.getExternalStorageDirectory().getPath() + "/com.baidaibao/log/";
     private static final String FILE_NAME = "crash";
 
     //log文件的后缀名
@@ -69,7 +69,7 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
     @Override
     public void uncaughtException(Thread thread, Throwable ex) {
         try {
-            restartApp();//重启App
+            judgeEnvironment(ex);
             dumpExceptionToSDCard(ex);//导出异常信息到SD卡中
             uploadExceptionToServer();//这里可以通过网络上传异常信息到服务器，便于开发人员分析日志从而解决bug
         } catch (IOException e) {
@@ -85,22 +85,33 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
     }
 
     /**
+     * 判断环境
+     *
+     * @param ex
+     */
+    private void judgeEnvironment(Throwable ex) {
+        if (HttpClient.ENVIRONMENT == 2) {//不是正式环境的时候，奔溃会弹出日志
+            restartApp();
+        } else {
+            mContext.startActivity(TestActivity.newIntent(mContext, ex.getMessage()));
+        }
+    }
+
+    /**
      * 重启应用
      */
     private void restartApp() {
-        Intent intent = new Intent(MyApplication.getContext(), MainActivity.class);
-        PendingIntent restartIntent = PendingIntent.getActivity(MyApplication.getContext(), 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);//退出程序
-        AlarmManager mgr = (AlarmManager) MyApplication.getContext().getSystemService(Context.ALARM_SERVICE);
+        Intent intent = new Intent(MyApplication.getAppContext(), MainActivity.class);
+        PendingIntent restartIntent = PendingIntent.getActivity(MyApplication.getAppContext(), 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);//退出程序
+        AlarmManager mgr = (AlarmManager) MyApplication.getAppContext().getSystemService(Context.ALARM_SERVICE);
         mgr.set(AlarmManager.RTC, System.currentTimeMillis(), restartIntent); // 重启应用
     }
 
     private void dumpExceptionToSDCard(Throwable ex) throws IOException {
         //如果SD卡不存在或无法使用，则无法把异常信息写入SD卡
         if (!Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
-            if (DEBUG) {
-                Log.w(TAG, "sdcard unmounted,skip dump exception");
-                return;
-            }
+            Log.w(TAG, "sdcard unmounted,skip dump exception");
+            return;
         }
 
         File dir = new File(PATH);
@@ -131,7 +142,7 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
         //应用的版本名称和版本号
         PackageManager pm = mContext.getPackageManager();
         PackageInfo pi = pm.getPackageInfo(mContext.getPackageName(), PackageManager.GET_ACTIVITIES);
-        pw.print("MyApplication Version: ");
+        pw.print("App Version: ");
         pw.print(pi.versionName);
         pw.print('_');
         pw.println(pi.versionCode);
@@ -155,8 +166,11 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
         pw.println(Build.CPU_ABI);
     }
 
+    /**
+     * 上传到服务器
+     */
     private void uploadExceptionToServer() {
-        //TODO Upload Exception Message To Your Web Server
+
     }
 
 }
