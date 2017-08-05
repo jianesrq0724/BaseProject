@@ -40,7 +40,7 @@ public final class ToastUtils {
      */
     private static void show(CharSequence text, int duration) {
         if (sToast == null) {
-            sToast = Toast.makeText(MyApplication.getContext(), text, duration);
+            sToast = Toast.makeText(MyApplication.getAppContext(), text, duration);
         } else {
             sToast.setText(text);
         }

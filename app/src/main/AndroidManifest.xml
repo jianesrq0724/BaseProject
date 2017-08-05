@@ -25,7 +25,10 @@
         </activity>
         <activity android:name=".module.test.TestActivity"/>
         <activity android:name=".commonality.browse.x5webview.X5WebViewBrowseActivity"/>
-        <activity android:name=".crash.TestActivity">
+        <activity
+            android:name=".crash.CrashInfoActivity"
+            android:launchMode="singleTop"
+            >
         </activity>
     </application>
 

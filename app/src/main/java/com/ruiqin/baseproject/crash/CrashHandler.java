@@ -93,7 +93,7 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
         if (HttpClient.ENVIRONMENT == 2) {//不是正式环境的时候，奔溃会弹出日志
             restartApp();
         } else {
-            mContext.startActivity(TestActivity.newIntent(mContext, ex.getMessage()));
+            CrashInfoActivity.newInstance(mContext, ex.getMessage());
         }
     }
 

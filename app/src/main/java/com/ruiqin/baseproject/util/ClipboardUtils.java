@@ -15,7 +15,7 @@ import com.ruiqin.baseproject.MyApplication;
 
 public class ClipboardUtils {
     public static void copyText(CharSequence text) {
-        ClipboardManager clipboardManager = (ClipboardManager) MyApplication.getContext().getSystemService(Context.CLIPBOARD_SERVICE);
+        ClipboardManager clipboardManager = (ClipboardManager) MyApplication.getAppContext().getSystemService(Context.CLIPBOARD_SERVICE);
         clipboardManager.setPrimaryClip(ClipData.newPlainText("text", text));
     }
 
