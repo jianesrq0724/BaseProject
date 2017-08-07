@@ -10,6 +10,8 @@ import com.ruiqin.baseproject.greendao.gen.DaoMaster;
 import com.ruiqin.baseproject.greendao.gen.DaoSession;
 import com.ruiqin.baseproject.util.LogUtils;
 import com.tencent.smtt.sdk.QbSdk;
+import com.umeng.socialize.PlatformConfig;
+import com.umeng.socialize.UMShareAPI;
 
 import org.greenrobot.greendao.database.Database;
 
@@ -23,6 +25,11 @@ public class MyApplication extends Application {
     public static String token;//用户token
     public static String mobileNum;
 
+    {
+        PlatformConfig.setWeixin("wx4ce204c32f3c2181", "e5f37f10f34601a3e2d8516e8c09c834");
+        PlatformConfig.setQQZone("1106116934", "dcPiNHxCFboZmfuj");
+    }
+
     @Override
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
@@ -34,6 +41,10 @@ public class MyApplication extends Application {
         super.onCreate();
         mContext = getApplicationContext();
         Utils.init(mContext);
+
+
+        //友盟初始化
+        UMShareAPI.get(this);
 
         /**
          * 初始化数据库
