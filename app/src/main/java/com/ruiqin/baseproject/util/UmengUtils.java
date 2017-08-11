@@ -2,6 +2,7 @@ package com.ruiqin.baseproject.util;
 
 import android.content.Context;
 
+import com.ruiqin.baseproject.constant.NetWorkEnvironment;
 import com.ruiqin.baseproject.network.HttpClient;
 import com.umeng.analytics.MobclickAgent;
 
@@ -64,7 +65,7 @@ public class UmengUtils {
      * @return
      */
     private static boolean checkNetWorkEnvironment() {
-        if (HttpClient.ENVIRONMENT == 2) {
+        if (HttpClient.ENVIRONMENT == NetWorkEnvironment.RELEASE) {
             return true;
         }
         return false;

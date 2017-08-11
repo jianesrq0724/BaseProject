@@ -5,6 +5,9 @@ package com.ruiqin.baseproject.constant;
  * 类说明：
  */
 
-public class SPConstant {
+public final class SPConstant {
+    private SPConstant() {
+    }
+
     public static final String SP_MOBILENUM = "mobileNum";//
 }

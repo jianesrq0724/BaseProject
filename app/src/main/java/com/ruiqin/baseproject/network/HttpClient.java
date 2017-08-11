@@ -1,7 +1,11 @@
 package com.ruiqin.baseproject.network;
 
+import android.os.Handler;
+import android.os.Message;
+
 import com.blankj.utilcode.util.AppUtils;
 import com.blankj.utilcode.util.StringUtils;
+import com.ruiqin.baseproject.constant.NetWorkEnvironment;
 import com.ruiqin.baseproject.constant.NetWorkState;
 import com.ruiqin.baseproject.network.entity.HttpResult;
 import com.ruiqin.baseproject.util.DataWareHouse;
@@ -27,11 +31,11 @@ import static com.ruiqin.baseproject.constant.Constant.PLATFORM;
 
 public class HttpClient {
 
-    private static final String BASE_URL_DEV_LOCAL = "http://192.168.20.12/api/";//本地，内网。"http://192.168.1.111:5071"
+    private static final String BASE_URL_LOCAL_DEV = "http://192.168.20.12/api/";//本地，内网。"http://192.168.1.111:5071"
+    private static final String BASE_URL_LOCAL_TEMP = "http://192.168.20.232/api/";//临时
     private static final String BASE_URL_DEV = "http://112.74.107.186:9003/api/";//TT环境
     private static final String BASE_URL_RELEASE = "http://app.fulijr.com/api/";//正式"http://app.fulijr.com";
-    private static final String BASE_URL_TEMP_LOCAL = "http://192.168.1.108:9003/api/";//临时
-
+    public static final int ENVIRONMENT = NetWorkEnvironment.LOCAL_DEVELOP;// LOCAL_DEVELOP本地，LOCAL_TEMP临时，DEVELOP TT环境，RELEASE正式
 
     public static HttpClient getInstance() {
         return SingletonHolder.INSTANCE;
@@ -41,21 +45,19 @@ public class HttpClient {
         private static final HttpClient INSTANCE = new HttpClient();
     }
 
-    public static final int ENVIRONMENT = 1;// 0为本地，1为线下，2为正式, 3临时
-
     /**
      * 获取开发环境
      */
     public String getBaseURL() {
         switch (ENVIRONMENT) {
-            case 0:
-                return BASE_URL_DEV_LOCAL;
-            case 1:
+            case NetWorkEnvironment.LOCAL_DEVELOP:
+                return BASE_URL_LOCAL_DEV;
+            case NetWorkEnvironment.LOCAL_TEMP:
+                return BASE_URL_LOCAL_TEMP;
+            case NetWorkEnvironment.DEVELOP:
                 return BASE_URL_DEV;
-            case 2:
+            case NetWorkEnvironment.RELEASE:
                 return BASE_URL_RELEASE;
-            case 3:
-                return BASE_URL_TEMP_LOCAL;
             default:
                 return BASE_URL_RELEASE;
         }
@@ -103,12 +105,28 @@ public class HttpClient {
         @Override
         public T apply(@NonNull HttpResult<T> tHttpResult) throws Exception {
             if (tHttpResult.getStatus() != NetWorkState.SUCCEES) {
-                ToastUtils.showShort(tHttpResult.getMessage());
+                Message message = new Message();
+                message.obj = tHttpResult.getMessage();
+                handler.sendMessage(message);
                 throw new ApiException();
             }
             return tHttpResult.getResult();
         }
     }
 
+    static Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case 0:
+                    String data = (String) msg.obj;
+                    ToastUtils.showShort(data);
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
 
 }

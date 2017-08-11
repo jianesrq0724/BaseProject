@@ -2,6 +2,10 @@ package com.ruiqin.baseproject.util;
 
 import android.util.Log;
 
+import com.ruiqin.baseproject.constant.NetWorkEnvironment;
+import com.ruiqin.baseproject.network.HttpClient;
+
+
 public class LogUtils {
     public static final String TAG = "TAG";   //自定义TAG
 
@@ -10,7 +14,7 @@ public class LogUtils {
     public static final int INFO = 3;
     public static final int WARN = 4;
     public static final int ERROR = 5;
-    public static final int NOTHING = 6;    //屏蔽日志时只需要把LEVE赋为这个值就可以了
+    public static final int NOTHING = 6;
     public static final int LEVEL = VERBOSE;
 
     public static void v(String msg) {
@@ -19,7 +23,9 @@ public class LogUtils {
 
     public static void v(String tag, String msg) {
         if (LEVEL <= VERBOSE) {
-            Log.v(tag, msg);
+            if (checkNetWorkEnvironment()) {
+                Log.v(tag, msg);
+            }
         }
     }
 
@@ -29,7 +35,9 @@ public class LogUtils {
 
     public static void d(String tag, String msg) {
         if (LEVEL <= DEBUG) {
-            Log.d(tag, msg);
+            if (checkNetWorkEnvironment()) {
+                Log.d(tag, msg);
+            }
         }
     }
 
@@ -39,7 +47,9 @@ public class LogUtils {
 
     public static void i(String tag, String msg) {
         if (LEVEL <= INFO) {
-            Log.i(tag, msg);
+            if (checkNetWorkEnvironment()) {
+                Log.i(tag, msg);
+            }
         }
     }
 
@@ -49,7 +59,9 @@ public class LogUtils {
 
     public static void w(String tag, String msg) {
         if (LEVEL <= WARN) {
-            Log.w(tag, msg);
+            if (checkNetWorkEnvironment()) {
+                Log.w(tag, msg);
+            }
         }
     }
 
@@ -59,7 +71,22 @@ public class LogUtils {
 
     public static void e(String tag, String msg) {
         if (LEVEL <= ERROR) {
-            Log.e(tag, msg);
+            if (checkNetWorkEnvironment()) {
+                Log.e(tag, msg);
+            }
         }
     }
+
+    /**
+     * 检出需要打印日志的网络环境
+     *
+     * @return
+     */
+    private static boolean checkNetWorkEnvironment() {
+        if (HttpClient.ENVIRONMENT != NetWorkEnvironment.RELEASE) {
+            return true;
+        }
+        return false;
+    }
+
 }

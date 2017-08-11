@@ -5,7 +5,10 @@ package com.ruiqin.baseproject.constant;
  * 类说明：访问H5的网络请求类型
  */
 
-public class NetWorkType {
+public final class NetWorkType {
+    private NetWorkType() {
+    }
+
     public static final String GET = "GET";
     public static final String POST = "POST";
 }
