@@ -6,14 +6,15 @@
 * 实现ViewPage的懒加载
 * 集成崩溃日志，在非正式环境下，通过界面展示出来
 
->第三方库的使用
->> 网络请求：Retrofit+RxJava+RxAndroid+Lambda，自己封装Retrofit，使用单列，另进行token拦截
->> 图片加载：greenDao
->> 数据库：greenDao（对象关系型数据库）
->> 统计、分享：umeng
->> 布局：ButterKnife、RecyclerView、CardView、Constraint
->> 事件订阅：EventBus
->> 浏览器：腾讯的X5WebView
+
+## 第三方库的使用
+* 网络请求：Retrofit+RxJava+RxAndroid+Lambda，自己封装Retrofit，使用单列，另进行token拦截
+* 图片加载：greenDao
+* 数据库：greenDao（对象关系型数据库）
+* 统计、分享：umeng
+* 布局：ButterKnife、RecyclerView、CardView、Constraint
+* 事件订阅：EventBus
+* 浏览器：腾讯的X5WebView
 
 
 # 优化BaseActivity 2017-8-1
