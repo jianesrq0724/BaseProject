@@ -55,5 +55,6 @@ dependencies {
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.6.0'
     compile 'com.umeng.analytics:analytics:latest.integration'
 
-    compile project(":pickerviewlib")
+    compile 'com.contrarywind:Android-PickerView:3.2.7'
+
 }
