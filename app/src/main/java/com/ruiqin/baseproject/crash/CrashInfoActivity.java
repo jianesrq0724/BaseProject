@@ -2,7 +2,6 @@ package com.ruiqin.baseproject.crash;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.widget.TextView;
 
 import com.ruiqin.baseproject.R;
@@ -25,10 +24,18 @@ public class CrashInfoActivity extends BaseActivity {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_crash_info);
+    protected void initData() {
         getIntentData();
+    }
+
+    @Override
+    protected void initView() {
+
+    }
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.activity_crash_info;
     }
 
     private void getIntentData() {

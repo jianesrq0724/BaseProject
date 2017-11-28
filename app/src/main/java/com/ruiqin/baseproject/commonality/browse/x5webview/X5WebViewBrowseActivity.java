@@ -92,13 +92,28 @@ public class X5WebViewBrowseActivity extends BaseActivity {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_browser);
         getWindow().setFormat(PixelFormat.TRANSLUCENT);
         getIntentData();//从Intent中获取数据
         initToolBar();
         DelayInitWebView();
+    }
+
+    @Override
+    protected void initData() {
+
+    }
+
+    @Override
+    protected void initView() {
+
+    }
+
+    @Override
+    protected int getLayoutId() {
+
+        return R.layout.activity_browser;
     }
 
     /**

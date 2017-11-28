@@ -1,7 +1,7 @@
 package com.ruiqin.baseproject.module.home;
 
+import com.ruiqin.baseproject.module.demo.PickerViewDemoActivity;
 import com.ruiqin.baseproject.module.home.bean.MainRecyclerData;
-import com.ruiqin.baseproject.module.test.TestActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +15,7 @@ public class MainModel implements MainContract.Model {
     @Override
     public List<MainRecyclerData> initData() {
         List<MainRecyclerData> recyclerDataList = new ArrayList<>();
-        recyclerDataList.add(new MainRecyclerData("TestActivity", TestActivity.class));
+        recyclerDataList.add(new MainRecyclerData("PickerViewDemo", PickerViewDemoActivity.class));
         return recyclerDataList;
     }
 }

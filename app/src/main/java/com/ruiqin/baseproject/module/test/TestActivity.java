@@ -1,7 +1,6 @@
 package com.ruiqin.baseproject.module.test;
 
 import android.app.AlertDialog;
-import android.os.Bundle;
 
 import com.ruiqin.baseproject.R;
 import com.ruiqin.baseproject.base.BaseActivity;
@@ -14,9 +13,18 @@ import butterknife.OnClick;
 public class TestActivity extends BaseActivity {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_test);
+    protected void initData() {
+
+    }
+
+    @Override
+    protected void initView() {
+
+    }
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.activity_test;
     }
 
     @Override

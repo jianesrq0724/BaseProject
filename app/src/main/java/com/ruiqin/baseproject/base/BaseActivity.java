@@ -40,7 +40,10 @@ public abstract class BaseActivity<P extends BasePresenter, M extends BaseModel>
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //加载main的布局
         setContentView(R.layout.activity_base);
+        //加载子类的布局
+        setContentView(getLayoutId());
         if (canAddCollector()) {
             ActivityCollector.addActivity(this);
         }
@@ -51,7 +54,15 @@ public abstract class BaseActivity<P extends BasePresenter, M extends BaseModel>
             mPresenter.setVM(this, InstanceUtil.getInstance(this, 1));
         }
         initToolBar();
+        initData();
+        initView();
     }
+
+    protected abstract void initData();
+
+    protected abstract void initView();
+
+    protected abstract int getLayoutId();
 
     public boolean canAddCollector() {
         return true;

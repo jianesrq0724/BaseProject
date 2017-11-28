@@ -1,7 +1,5 @@
 package com.ruiqin.baseproject.module.home;
 
-import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
@@ -23,11 +21,18 @@ public class MainActivity extends BaseActivity<MainPresenter, MainModel> impleme
     }
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        addFragment(new BlankFragment());
+    protected void initData() {
         mPresenter.setAdapter();
+    }
+
+    @Override
+    protected void initView() {
+        addFragment(new BlankFragment());
+    }
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.activity_main;
     }
 
     @Override

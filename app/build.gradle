@@ -54,4 +54,6 @@ dependencies {
     testCompile 'junit:junit:4.12'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.6.0'
     compile 'com.umeng.analytics:analytics:latest.integration'
+
+    compile project(":pickerviewlib")
 }
