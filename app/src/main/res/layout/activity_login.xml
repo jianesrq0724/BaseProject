@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/main_theme"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/title_park"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text="台州停车"
+        android:textColor="@color/white"
+        android:textSize="48sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center_horizontal"
+        android:text="路 边 停 车 收 费 终 端"
+        android:textColor="@color/white"
+        android:textSize="18sp" />
+
+
+    <EditText
+        android:id="@+id/login_user_name_et"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginTop="30dp"
+        android:hint="请输入账户"
+        android:text="srq"
+        android:textCursorDrawable="@drawable/login_text_cursor" />
+
+    <EditText
+        android:id="@+id/login_user_pw_et"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:hint="请输入密码"
+        android:inputType="textPassword"
+        android:text="123456"
+        android:textCursorDrawable="@drawable/login_text_cursor" />
+
+    <TextView
+        android:id="@+id/login_tv"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/btn_submit_shape_white"
+        android:gravity="center"
+        android:text="登录"
+        android:textColor="@color/main_theme"
+        android:textSize="25sp" />
+
+</LinearLayout>

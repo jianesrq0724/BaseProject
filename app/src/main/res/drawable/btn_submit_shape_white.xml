@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <!-- 顶部带圆角 白色背景 灰色边框  长方体 -->
+    <item>
+        <selector>
+            <item android:state_enabled="false">
+                <shape>
+                    <solid android:color="@color/white"/>
+
+                    <corners
+                        android:bottomLeftRadius="4dp"
+                        android:bottomRightRadius="4dp"
+                        android:topLeftRadius="4dp"
+                        android:topRightRadius="4dp" />
+
+                    <stroke
+                        android:width="0dp"
+                        android:color="@color/orange" />
+                </shape>
+            </item>
+            <item android:state_pressed="false">
+                <shape>
+                    <solid android:color="@color/white"/>
+
+                    <corners
+                        android:bottomLeftRadius="4dp"
+                        android:bottomRightRadius="4dp"
+                        android:topLeftRadius="4dp"
+                        android:topRightRadius="4dp" />
+
+                    <stroke
+                        android:width="0dp"
+                        android:color="@color/orange" />
+                </shape>
+            </item>
+            <item android:state_pressed="true">
+                <shape>
+                    <solid android:color="@color/light_white" />
+
+                    <corners
+                        android:bottomLeftRadius="4dp"
+                        android:bottomRightRadius="4dp"
+                        android:topLeftRadius="4dp"
+                        android:topRightRadius="4dp" />
+
+                    <stroke
+                        android:width="0dp"
+                        android:color="@color/orange" />
+                </shape>
+            </item>
+        </selector>
+    </item>
+
+</layer-list>

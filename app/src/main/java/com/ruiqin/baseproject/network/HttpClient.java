@@ -39,7 +39,7 @@ public class HttpClient {
         private static final HttpClient INSTANCE = new HttpClient();
     }
 
-    private final RestAPI service;
+    public final RestAPI service;
 
     private HttpClient() {
         OkHttpClient okHttpClient = new OkHttpClient.Builder()

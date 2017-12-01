@@ -45,7 +45,7 @@ android {
             multiDexEnabled true
             def
 //                    eInnerUrl = '"http://192.168.20.232/api/"'
-                    eInnerUrl = '"http://192.168.20.12/api/"'
+                    eInnerUrl = '"http://192.168.9.103:8008/std/"'
             buildConfigField "String", "Url_Common", eInnerUrl
             buildConfigField "int", "URL_TYPE", "0"
             //是否需要本地异常日志
@@ -54,7 +54,9 @@ android {
 
         //测试环境
         experiment {
-            debuggable false
+            signingConfig signingConfigs.debug
+            debuggable true
+            minifyEnabled false
             shrinkResources false
             multiDexEnabled true
             buildConfigField "String", "Url_Common", '"http://112.74.107.186:9003/api/"'
