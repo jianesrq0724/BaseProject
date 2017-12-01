@@ -11,9 +11,9 @@ import android.os.Build;
 import android.os.Environment;
 import android.util.Log;
 
+import com.ruiqin.baseproject.BuildConfig;
 import com.ruiqin.baseproject.MyApplication;
 import com.ruiqin.baseproject.module.home.MainActivity;
-import com.ruiqin.baseproject.network.HttpClient;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -90,9 +90,11 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
      * @param ex
      */
     private void judgeEnvironment(Throwable ex) {
-        if (HttpClient.ENVIRONMENT == 2) {//不是正式环境的时候，奔溃会弹出日志
+        //正式环境重启APP
+        if (BuildConfig.BUILD_TYPE.equals("release")) {
             restartApp();
         } else {
+            //非正式环境显示日志界面
             CrashInfoActivity.newInstance(mContext, ex.getMessage());
         }
     }

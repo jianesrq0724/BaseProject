@@ -2,8 +2,7 @@ package com.ruiqin.baseproject.util;
 
 import android.content.Context;
 
-import com.ruiqin.baseproject.constant.NetWorkEnvironment;
-import com.ruiqin.baseproject.network.HttpClient;
+import com.ruiqin.baseproject.BuildConfig;
 import com.umeng.analytics.MobclickAgent;
 
 import java.util.Map;
@@ -60,12 +59,12 @@ public class UmengUtils {
     }
 
     /**
-     * 检出需要统计的网络环境
+     * 正式环境进行统计
      *
      * @return
      */
     private static boolean checkNetWorkEnvironment() {
-        if (HttpClient.ENVIRONMENT == NetWorkEnvironment.RELEASE) {
+        if (BuildConfig.BUILD_TYPE.equals("release")) {
             return true;
         }
         return false;

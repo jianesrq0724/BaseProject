@@ -5,7 +5,7 @@ import android.os.Message;
 
 import com.blankj.utilcode.util.AppUtils;
 import com.blankj.utilcode.util.StringUtils;
-import com.ruiqin.baseproject.constant.NetWorkEnvironment;
+import com.ruiqin.baseproject.BuildConfig;
 import com.ruiqin.baseproject.constant.NetWorkState;
 import com.ruiqin.baseproject.network.entity.HttpResult;
 import com.ruiqin.baseproject.util.DataWareHouse;
@@ -31,36 +31,12 @@ import static com.ruiqin.baseproject.constant.Constant.PLATFORM;
 
 public class HttpClient {
 
-    private static final String BASE_URL_LOCAL_DEV = "http://192.168.20.12/api/";//本地，内网。"http://192.168.1.111:5071"
-    private static final String BASE_URL_LOCAL_TEMP = "http://192.168.20.232/api/";//临时
-    private static final String BASE_URL_DEV = "http://112.74.107.186:9003/api/";//TT环境
-    private static final String BASE_URL_RELEASE = "http://app.fulijr.com/api/";//正式"http://app.fulijr.com";
-    public static final int ENVIRONMENT = NetWorkEnvironment.LOCAL_DEVELOP;// LOCAL_DEVELOP本地，LOCAL_TEMP临时，DEVELOP TT环境，RELEASE正式
-
     public static HttpClient getInstance() {
         return SingletonHolder.INSTANCE;
     }
 
     private static class SingletonHolder {
         private static final HttpClient INSTANCE = new HttpClient();
-    }
-
-    /**
-     * 获取开发环境
-     */
-    public String getBaseURL() {
-        switch (ENVIRONMENT) {
-            case NetWorkEnvironment.LOCAL_DEVELOP:
-                return BASE_URL_LOCAL_DEV;
-            case NetWorkEnvironment.LOCAL_TEMP:
-                return BASE_URL_LOCAL_TEMP;
-            case NetWorkEnvironment.DEVELOP:
-                return BASE_URL_DEV;
-            case NetWorkEnvironment.RELEASE:
-                return BASE_URL_RELEASE;
-            default:
-                return BASE_URL_RELEASE;
-        }
     }
 
     private final RestAPI service;
@@ -75,7 +51,7 @@ public class HttpClient {
 
         Retrofit retrofit = new Retrofit.Builder()
                 .client(okHttpClient)
-                .baseUrl(getBaseURL())
+                .baseUrl(BuildConfig.Url_Common)
                 .build();
         service = retrofit.create(RestAPI.class);
     }

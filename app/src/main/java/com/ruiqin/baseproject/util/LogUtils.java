@@ -2,8 +2,7 @@ package com.ruiqin.baseproject.util;
 
 import android.util.Log;
 
-import com.ruiqin.baseproject.constant.NetWorkEnvironment;
-import com.ruiqin.baseproject.network.HttpClient;
+import com.ruiqin.baseproject.BuildConfig;
 
 
 public class LogUtils {
@@ -78,12 +77,12 @@ public class LogUtils {
     }
 
     /**
-     * 检出需要打印日志的网络环境
+     * 非正式环境打印日志
      *
      * @return
      */
     private static boolean checkNetWorkEnvironment() {
-        if (HttpClient.ENVIRONMENT != NetWorkEnvironment.RELEASE) {
+        if (!BuildConfig.BUILD_TYPE.equals("release")) {
             return true;
         }
         return false;

@@ -1,6 +1,9 @@
 apply plugin: 'com.android.application'
 apply plugin: 'org.greenrobot.greendao' // apply plugin
 
+Properties props = new Properties()
+props.load(new FileInputStream(file("signing.properties")))
+
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
     buildToolsVersion rootProject.ext.buildToolsVersion
@@ -10,14 +13,78 @@ android {
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
-        versionName "1.0"
+        versionName "1.2"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
     }
-    buildTypes {
+
+    //签名配置
+    signingConfigs {
+        debug {
+            keyAlias props['KEY_ALIAS']
+            keyPassword props['KEY_PASSWORD']
+            storeFile file(props['KEYSTORE_FILE'])
+            storePassword props['KEYSTORE_PASSWORD']
+        }
         release {
-            minifyEnabled false
+            keyAlias props['KEY_ALIAS']
+            keyPassword props['KEY_PASSWORD']
+            storeFile file(props['KEYSTORE_FILE'])
+            storePassword props['KEYSTORE_PASSWORD']
+        }
+    }
+
+
+    buildTypes {
+        //开发环境
+        develop {
+            signingConfig signingConfigs.debug
+            debuggable true
+            minifyEnabled false// 是否混淆
+            shrinkResources false// 是否去除无效的资源文件
+            multiDexEnabled true
+            def
+//                    eInnerUrl = '"http://192.168.20.232/api/"'
+                    eInnerUrl = '"http://192.168.20.12/api/"'
+            buildConfigField "String", "Url_Common", eInnerUrl
+            buildConfigField "int", "URL_TYPE", "0"
+            //是否需要本地异常日志
+            buildConfigField "boolean", "IS_CRASH", "false"
+        }
+
+        //测试环境
+        experiment {
+            debuggable false
+            shrinkResources false
+            multiDexEnabled true
+            buildConfigField "String", "Url_Common", '"http://112.74.107.186:9003/api/"'
+            buildConfigField "int", "URL_TYPE", "1"
+            //是否需要本地异常日志
+            buildConfigField "boolean", "IS_CRASH", "false"
+        }
+
+        //debug环境
+        debug {
+            debuggable false
+            minifyEnabled true
+            buildConfigField "String", "Url_Common", '"http://app.fulijr.com/api/"'
+            buildConfigField "int", "URL_TYPE", "2"
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            //是否需要本地异常日志
+            buildConfigField "boolean", "IS_CRASH", "false"
+        }
+
+        //正式环境
+        release {
+            signingConfig signingConfigs.release
+            minifyEnabled true
+            shrinkResources true
+            debuggable false
+            buildConfigField "String", "Url_Common", '"http://app.fulijr.com/api/"'
+            buildConfigField "int", "URL_TYPE", "2"
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            //是否需要本地异常日志
+            buildConfigField "boolean", "IS_CRASH", "true"
         }
     }
 
