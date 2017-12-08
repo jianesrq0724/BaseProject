@@ -4,14 +4,14 @@ import android.widget.EditText;
 
 import com.ruiqin.baseproject.R;
 import com.ruiqin.baseproject.base.BaseActivity;
+import com.ruiqin.baseproject.interfaces.ILoading;
 import com.ruiqin.baseproject.network.HttpClient;
 import com.ruiqin.baseproject.network.entity.RespLogin;
+import com.ruiqin.baseproject.util.RxUtils;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
-import io.reactivex.schedulers.Schedulers;
 
 public class LoginActivity extends BaseActivity {
 
@@ -40,11 +40,13 @@ public class LoginActivity extends BaseActivity {
         return 0;
     }
 
+    /**
+     * 登录
+     */
     @OnClick(R.id.login_tv)
     public void onViewClicked() {
         HttpClient.getInstance().service.login(mLoginUserNameEt.getText().toString(), mLoginUserPwEt.getText().toString())
-                .subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread())
+                .compose(RxUtils.getScheduler(true, (ILoading) mContext))
                 .subscribe(new Consumer<RespLogin>() {
                     @Override
                     public void accept(RespLogin respLogin) throws Exception {

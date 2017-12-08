@@ -1,8 +1,5 @@
 package com.ruiqin.baseproject.network;
 
-import android.os.Handler;
-import android.os.Message;
-
 import com.blankj.utilcode.util.AppUtils;
 import com.blankj.utilcode.util.StringUtils;
 import com.ruiqin.baseproject.BuildConfig;
@@ -14,7 +11,10 @@ import com.ruiqin.baseproject.util.ToastUtils;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
+import io.reactivex.Flowable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
+import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
@@ -61,7 +61,8 @@ public class HttpClient {
         @Override
         public Response intercept(Chain chain) throws IOException {
             Request.Builder builder = chain.request().newBuilder();
-            String token = DataWareHouse.getToken();//获取token值
+            //获取token值
+            String token = DataWareHouse.getToken();
             if (!StringUtils.isEmpty(token)) {
                 builder.header("access-token", token);
             }
@@ -81,28 +82,26 @@ public class HttpClient {
         @Override
         public T apply(@NonNull HttpResult<T> tHttpResult) throws Exception {
             if (tHttpResult.getStatus() != NetWorkState.SUCCEES) {
-                Message message = new Message();
-                message.obj = tHttpResult.getMessage();
-                handler.sendMessage(message);
+                networkMessage(tHttpResult.getMessage());
                 throw new ApiException();
             }
             return tHttpResult.getResult();
         }
     }
 
-    static Handler handler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            switch (msg.what) {
-                case 0:
-                    String data = (String) msg.obj;
-                    ToastUtils.showShort(data);
-                    break;
-                default:
-                    break;
-            }
-        }
-    };
+    /**
+     * 错误网络请求
+     *
+     * @param message
+     */
+    private static void networkMessage(String message) {
+        Flowable.just(message).observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<String>() {
+                    @Override
+                    public void accept(String message) throws Exception {
+                        ToastUtils.showShort(message);
+                    }
+                }, Throwable::printStackTrace);
+    }
 
 }
