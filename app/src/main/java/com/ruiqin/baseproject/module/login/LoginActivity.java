@@ -50,6 +50,7 @@ public class LoginActivity extends BaseActivity {
                     public void accept(RespLogin respLogin) throws Exception {
 
                     }
-                });
+                }, Throwable::printStackTrace);
     }
+
 }
