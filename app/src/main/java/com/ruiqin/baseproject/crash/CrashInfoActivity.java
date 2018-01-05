@@ -6,6 +6,7 @@ import android.widget.TextView;
 
 import com.ruiqin.baseproject.R;
 import com.ruiqin.baseproject.base.BaseActivity;
+import com.ruiqin.baseproject.base.BasePresenter;
 
 import butterknife.BindView;
 
@@ -36,6 +37,11 @@ public class CrashInfoActivity extends BaseActivity {
     @Override
     protected int getLayoutId() {
         return R.layout.activity_crash_info;
+    }
+
+    @Override
+    protected BasePresenter createPresenter() {
+        return null;
     }
 
     private void getIntentData() {

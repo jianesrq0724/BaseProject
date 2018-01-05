@@ -16,6 +16,7 @@ import android.widget.ProgressBar;
 import com.blankj.utilcode.util.AppUtils;
 import com.ruiqin.baseproject.R;
 import com.ruiqin.baseproject.base.BaseActivity;
+import com.ruiqin.baseproject.base.BasePresenter;
 import com.ruiqin.baseproject.commonality.browse.x5webview.view.X5WebView;
 import com.ruiqin.baseproject.constant.NetWorkType;
 import com.ruiqin.baseproject.util.LogUtils;
@@ -137,6 +138,11 @@ public class X5WebViewBrowseActivity extends BaseActivity {
      */
     private void initToolBar() {
         mToolbarTitle.setText(title);//设置标题
+    }
+
+    @Override
+    protected BasePresenter createPresenter() {
+        return null;
     }
 
     @Override

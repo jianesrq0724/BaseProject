@@ -18,7 +18,6 @@ import com.ruiqin.baseproject.R;
 import com.ruiqin.baseproject.commonality.view.LoadingDialog;
 import com.ruiqin.baseproject.interfaces.ILoading;
 import com.ruiqin.baseproject.util.ActivityCollector;
-import com.ruiqin.baseproject.util.InstanceUtil;
 import com.ruiqin.baseproject.util.UmengUtils;
 
 import butterknife.ButterKnife;
@@ -29,21 +28,27 @@ import butterknife.Unbinder;
  * 类说明：所有的Activity的基类
  * 在onCreate调用present的setVM方法，将View和Model关联起来
  */
-public abstract class BaseActivity<P extends BasePresenter, M extends BaseModel> extends AppCompatActivity implements ILoading {
-    public P mPresenter;
+public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCompatActivity implements ILoading {
+    public T mPresenter;
     public Context mContext;
     private Unbinder mBind;
     private FrameLayout contentView;
     private Toolbar mToolbar;
     protected TextView mToolbarTitle;
     protected boolean isDestroy;
-    //防止重复点击设置的标志，涉及到点击打开其他Activity时，将该标志设置为false，在onResume事件中设置为true
+    /**
+     * 防止重复点击设置的标志，涉及到点击打开其他Activity时，将该标志设置为false，在onResume事件中设置为true
+     */
     private boolean clickable = true;
     LoadingDialog mLoadingDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mPresenter = createPresenter();
+        if (mPresenter != null) {
+            mPresenter.attachView((V) this);
+        }
         //加载main的布局
         setContentView(R.layout.activity_base);
         //加载子类的布局
@@ -53,10 +58,6 @@ public abstract class BaseActivity<P extends BasePresenter, M extends BaseModel>
         }
         isDestroy = false;
         mContext = this;
-        if (this instanceof BaseView) {
-            mPresenter = InstanceUtil.getInstance(this, 0);
-            mPresenter.setVM(this, InstanceUtil.getInstance(this, 1));
-        }
         initToolBar();
         initData();
         initView();
@@ -139,6 +140,7 @@ public abstract class BaseActivity<P extends BasePresenter, M extends BaseModel>
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        mPresenter.detachView();
         if (mLoadingDialog != null) {
             if (mLoadingDialog.isShowing()) {
                 mLoadingDialog.dismiss();
@@ -149,6 +151,8 @@ public abstract class BaseActivity<P extends BasePresenter, M extends BaseModel>
         ActivityCollector.removeActivity(this);
         mBind.unbind();
     }
+
+    protected abstract T createPresenter();
 
     /**
      * 布局中Fragment的ID

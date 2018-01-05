@@ -10,8 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.ruiqin.baseproject.util.InstanceUtil;
-
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
@@ -20,7 +18,7 @@ import butterknife.Unbinder;
  * 类说明：所有的Fragment的基类，创建的Fragment都继承BaseFragment
  * 在onCreateView调用present的setVM方法，将View和Model关联起来
  */
-public abstract class BaseFragment<P extends BasePresenter, M extends BaseModel> extends Fragment {
+public abstract class BaseFragment<V, T extends BasePresenter<V>> extends Fragment {
 
     /**
      * Fragment当前状态是否可见
@@ -31,7 +29,7 @@ public abstract class BaseFragment<P extends BasePresenter, M extends BaseModel>
     protected BaseActivity mActivity;
     private Unbinder mBind;
 
-    public P mPresenter;
+    public T mPresenter;
 
     public Context mContext;
 
@@ -89,6 +87,8 @@ public abstract class BaseFragment<P extends BasePresenter, M extends BaseModel>
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mPresenter = createPresenter();
+        mPresenter.attachView((V) mContext);
         Log.e("TAG", "当前页面：" + getClass().getSimpleName());
     }
 
@@ -126,10 +126,6 @@ public abstract class BaseFragment<P extends BasePresenter, M extends BaseModel>
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(getLayoutId(), container, false);
         mBind = ButterKnife.bind(this, view);
-        if (this instanceof BaseView) {
-            mPresenter = InstanceUtil.getInstance(this, 0);
-            mPresenter.setVM(this, InstanceUtil.getInstance(this, 1));
-        }
         isPrepared = true;
         whetherLazyLoad();
         initView(view, savedInstanceState);
@@ -157,9 +153,12 @@ public abstract class BaseFragment<P extends BasePresenter, M extends BaseModel>
         super.onPause();
     }
 
+    protected abstract T createPresenter();
+
     @Override
     public void onDestroy() {
         super.onDestroy();
+        mPresenter.detachView();
         mBind.unbind();
     }
 }

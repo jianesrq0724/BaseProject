@@ -5,6 +5,7 @@ import android.view.View;
 
 import com.ruiqin.baseproject.R;
 import com.ruiqin.baseproject.base.BaseFragment;
+import com.ruiqin.baseproject.base.BasePresenter;
 
 public class BlankFragment extends BaseFragment {
     @Override
@@ -25,5 +26,10 @@ public class BlankFragment extends BaseFragment {
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_blank;
+    }
+
+    @Override
+    protected BasePresenter createPresenter() {
+        return null;
     }
 }

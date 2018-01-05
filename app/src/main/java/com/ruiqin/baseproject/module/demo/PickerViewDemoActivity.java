@@ -5,6 +5,7 @@ import android.widget.TextView;
 import com.bigkoo.pickerview.OptionsPickerView;
 import com.ruiqin.baseproject.R;
 import com.ruiqin.baseproject.base.BaseActivity;
+import com.ruiqin.baseproject.base.BasePresenter;
 import com.ruiqin.baseproject.util.OptionDataUtils;
 import com.ruiqin.baseproject.util.TimeUtils;
 
@@ -33,6 +34,11 @@ public class PickerViewDemoActivity extends BaseActivity {
     @Override
     protected int getLayoutId() {
         return R.layout.activity_picker_view_demo;
+    }
+
+    @Override
+    protected BasePresenter createPresenter() {
+        return null;
     }
 
     @Override

@@ -11,8 +11,8 @@ import java.util.List;
  * 类说明：
  */
 
-public class MainModel implements MainContract.Model {
-    @Override
+public class MainModel {
+
     public List<MainRecyclerData> initData() {
         List<MainRecyclerData> recyclerDataList = new ArrayList<>();
         recyclerDataList.add(new MainRecyclerData("PickerViewDemo", PickerViewDemoActivity.class));

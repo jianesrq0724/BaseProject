@@ -4,6 +4,7 @@ import android.widget.EditText;
 
 import com.ruiqin.baseproject.R;
 import com.ruiqin.baseproject.base.BaseActivity;
+import com.ruiqin.baseproject.base.BasePresenter;
 import com.ruiqin.baseproject.interfaces.ILoading;
 import com.ruiqin.baseproject.network.HttpClient;
 import com.ruiqin.baseproject.network.entity.RespLogin;
@@ -33,6 +34,11 @@ public class LoginActivity extends BaseActivity {
     @Override
     protected int getLayoutId() {
         return R.layout.activity_login;
+    }
+
+    @Override
+    protected BasePresenter createPresenter() {
+        return null;
     }
 
     @Override

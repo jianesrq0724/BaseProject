@@ -11,7 +11,7 @@ import com.ruiqin.baseproject.util.ToastUtils;
 
 import butterknife.BindView;
 
-public class MainActivity extends BaseActivity<MainPresenter, MainModel> implements MainContract.View {
+public class MainActivity extends BaseActivity<MainViewInterface, MainPresenter> implements MainViewInterface {
     @BindView(R.id.recyclerView)
     RecyclerView mRecyclerView;
 
@@ -39,6 +39,11 @@ public class MainActivity extends BaseActivity<MainPresenter, MainModel> impleme
     public boolean canBack() {
         mToolbarTitle.setText("BaseProject");
         return false;
+    }
+
+    @Override
+    protected MainPresenter createPresenter() {
+        return new MainPresenter();
     }
 
     private long lastClickTime;

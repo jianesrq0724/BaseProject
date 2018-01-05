@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 
 import com.ruiqin.baseproject.R;
 import com.ruiqin.baseproject.base.BaseActivity;
+import com.ruiqin.baseproject.base.BasePresenter;
 import com.ruiqin.baseproject.commonality.view.PermissionTipDialog;
 import com.ruiqin.baseproject.commonality.view.ShareDialog;
 import com.ruiqin.baseproject.commonality.view.TipCustomDialog;
@@ -25,6 +26,11 @@ public class TestActivity extends BaseActivity {
     @Override
     protected int getLayoutId() {
         return R.layout.activity_test;
+    }
+
+    @Override
+    protected BasePresenter createPresenter() {
+        return null;
     }
 
     @Override
