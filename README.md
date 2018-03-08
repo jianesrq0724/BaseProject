@@ -1,3 +1,6 @@
+2018-3-8号抽取baselibrary库，细节待优化
+---
+
 > # BaseProject 所有新项目的基础
 * 基于MVP，统一标题栏，使用ToolBar,并封装了返回事件
 * 支持Lambda表达式

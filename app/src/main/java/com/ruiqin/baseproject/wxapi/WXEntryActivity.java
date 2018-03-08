@@ -1,7 +1,6 @@
 package com.ruiqin.baseproject.wxapi;
 
-import com.umeng.weixin.callback.WXCallbackActivity;
-
-public class WXEntryActivity extends WXCallbackActivity {
-}
+// TODO: 2018/3/8
+//public class WXEntryActivity extends WXCallbackActivity {
+//}
 

@@ -9,6 +9,7 @@ buildscript {
     dependencies {
         classpath 'com.android.tools.build:gradle:3.0.1'
         classpath 'org.greenrobot:greendao-gradle-plugin:3.2.2' // add plugin
+        classpath 'com.jakewharton:butterknife-gradle-plugin:8.5.1'
     }
 }
 
@@ -24,9 +25,7 @@ task clean(type: Delete) {
 }
 
 ext() {
-    compileSdkVersion = 25
-    buildToolsVersion = "26.0.2"
+    compileSdkVersion = 26
     minSdkVersion = 16
-    targetSdkVersion = 25
-    supportLibVersion = '24.2.1'
+    targetSdkVersion = 26
 }

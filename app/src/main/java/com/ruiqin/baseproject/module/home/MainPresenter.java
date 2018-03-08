@@ -1,6 +1,6 @@
 package com.ruiqin.baseproject.module.home;
 
-import com.ruiqin.baseproject.base.BasePresenter;
+import com.ruiqin.baselibrary.base.BasePresenter;
 import com.ruiqin.baseproject.module.home.adapter.MainRecyclerAdapter;
 import com.ruiqin.baseproject.module.home.bean.MainRecyclerData;
 

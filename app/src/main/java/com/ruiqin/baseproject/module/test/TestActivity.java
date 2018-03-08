@@ -2,12 +2,12 @@ package com.ruiqin.baseproject.module.test;
 
 import android.app.AlertDialog;
 
+import com.ruiqin.baselibrary.base.BaseActivity;
+import com.ruiqin.baselibrary.base.BasePresenter;
 import com.ruiqin.baseproject.R;
-import com.ruiqin.baseproject.base.BaseActivity;
-import com.ruiqin.baseproject.base.BasePresenter;
-import com.ruiqin.baseproject.commonality.view.PermissionTipDialog;
-import com.ruiqin.baseproject.commonality.view.ShareDialog;
-import com.ruiqin.baseproject.commonality.view.TipCustomDialog;
+import com.ruiqin.baselibrary.commonality.view.PermissionTipDialog;
+import com.ruiqin.baselibrary.commonality.view.ShareDialog;
+import com.ruiqin.baselibrary.commonality.view.TipCustomDialog;
 
 import butterknife.OnClick;
 

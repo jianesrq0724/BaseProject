@@ -3,9 +3,10 @@ package com.ruiqin.baseproject.module;
 import android.os.Bundle;
 import android.view.View;
 
+import com.ruiqin.baselibrary.base.BaseFragment;
+import com.ruiqin.baselibrary.base.BasePresenter;
 import com.ruiqin.baseproject.R;
-import com.ruiqin.baseproject.base.BaseFragment;
-import com.ruiqin.baseproject.base.BasePresenter;
+
 
 public class BlankFragment extends BaseFragment {
     @Override
@@ -20,7 +21,7 @@ public class BlankFragment extends BaseFragment {
 
     @Override
     protected void initView(View view, Bundle savedInstanceState) {
-        
+
     }
 
     @Override

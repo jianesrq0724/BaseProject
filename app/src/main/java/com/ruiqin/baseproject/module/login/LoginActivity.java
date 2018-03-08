@@ -2,13 +2,13 @@ package com.ruiqin.baseproject.module.login;
 
 import android.widget.EditText;
 
+import com.ruiqin.baselibrary.base.BaseActivity;
+import com.ruiqin.baselibrary.base.BasePresenter;
 import com.ruiqin.baseproject.R;
-import com.ruiqin.baseproject.base.BaseActivity;
-import com.ruiqin.baseproject.base.BasePresenter;
-import com.ruiqin.baseproject.interfaces.ILoading;
-import com.ruiqin.baseproject.network.HttpClient;
-import com.ruiqin.baseproject.network.entity.RespLogin;
-import com.ruiqin.baseproject.util.RxUtils;
+import com.ruiqin.baselibrary.interfaces.ILoading;
+import com.ruiqin.baselibrary.network.HttpClient;
+import com.ruiqin.baselibrary.network.entity.RespLogin;
+import com.ruiqin.baselibrary.util.RxUtils;
 
 import butterknife.BindView;
 import butterknife.OnClick;

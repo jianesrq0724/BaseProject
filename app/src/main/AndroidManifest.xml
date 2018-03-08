@@ -62,10 +62,10 @@
         <!--TestActivity-->
         <activity android:name=".module.test.TestActivity" />
         <!--X5WebView-->
-        <activity android:name=".commonality.browse.x5webview.X5WebViewBrowseActivity" />
+        <activity android:name="com.ruiqin.baselibrary.commonality.browse.x5webview.X5WebViewBrowseActivity" />
         <!--崩溃信息-->
         <activity
-            android:name=".crash.CrashInfoActivity"
+            android:name="com.ruiqin.baselibrary.crash.CrashInfoActivity"
             android:launchMode="singleTop" />
         <activity android:name=".module.demo.PickerViewDemoActivity" />
         <!--登陆-->

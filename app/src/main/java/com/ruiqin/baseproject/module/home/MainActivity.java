@@ -3,11 +3,11 @@ package com.ruiqin.baseproject.module.home;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
+import com.ruiqin.baselibrary.base.BaseActivity;
 import com.ruiqin.baseproject.R;
-import com.ruiqin.baseproject.base.BaseActivity;
 import com.ruiqin.baseproject.module.BlankFragment;
 import com.ruiqin.baseproject.module.home.adapter.MainRecyclerAdapter;
-import com.ruiqin.baseproject.util.ToastUtils;
+import com.ruiqin.baselibrary.util.ToastUtils;
 
 import butterknife.BindView;
 

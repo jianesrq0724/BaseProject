@@ -3,11 +3,12 @@ package com.ruiqin.baseproject.module.demo;
 import android.widget.TextView;
 
 import com.bigkoo.pickerview.OptionsPickerView;
+import com.ruiqin.baselibrary.base.BaseActivity;
+import com.ruiqin.baselibrary.base.BasePresenter;
 import com.ruiqin.baseproject.R;
-import com.ruiqin.baseproject.base.BaseActivity;
-import com.ruiqin.baseproject.base.BasePresenter;
-import com.ruiqin.baseproject.util.OptionDataUtils;
-import com.ruiqin.baseproject.util.TimeUtils;
+
+import com.ruiqin.baselibrary.util.OptionDataUtils;
+import com.ruiqin.baselibrary.util.TimeUtils;
 
 import java.util.ArrayList;
 import java.util.Calendar;
