@@ -4,5 +4,23 @@
     <color name="colorPrimaryDark">#424954</color>
     <color name="colorAccent">#FF4081</color>
 
+    <!--透明背景-->
+    <color name="transparent">#00000000</color>
+
+    <!-- 白色 -->
+    <color name="white">#FFFFFF</color>
+
+    <!-- 背景色 -->
+    <color name="background">#F5F6F8</color>
+
+    <!--文本红色-->
+    <color name="text_red">#FF4C4C</color>
+
+    <!-- 文本黑色 -->
+    <color name="text_black">#424954</color>
+
+    <!--分割线颜色-->
+    <color name="line_color">#d8d8d8</color>
+
 
 </resources>

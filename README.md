@@ -1,41 +1,44 @@
-2018-3-8号抽取baselibrary库，细节待优化
----
+# MVP demo
+* 是否引入ButterKnife
+* ButterKnife在library和组件化的时候很不方便，这里先不适用ButterKnkife，使用findViewById,后期考虑databinding
+* 插件Android Layout ID convert可以方便的生成findViewById
 
-> # BaseProject 所有新项目的基础
-* 基于MVP，统一标题栏，使用ToolBar,并封装了返回事件
-* 支持Lambda表达式
-* 集成ButterKnife、EventBus、友盟统计、分享、Retrofit、Rxjava、Glide、greendao、utilcode等第三方库
-* RecyclerView、CardView
-* multidex 优化超出方法数的限制问题 64k问题
-* 实现ViewPage的懒加载
-* 集成崩溃日志，在非正式环境下，通过界面展示出来
+## RxManage 对线程管理
+
+## 耗时等待转圈封装
+* 网络请求等耗时操作，通过BaseActivity+RxJava完成封装，通过Loadinghelper来处理同时进行多个网络请求的进度条
+
+## BasePresenter的创建使用弱引用，防止内存泄漏
+*     protected WeakReference<T> mViewRef;
+  
+      public void attachView(T view) {
+          mViewRef = new WeakReference<>(view);
+      }
+     
+## 权限完成封装，请求权限
+permissions("短信", new String[]{Manifest.permission.SEND_SMS}, new PermissionsResultListener() {
+
+    @Override
+    public void onPermissionGranted() {
+        ToastUtils.showShort("短信权限授予");
+    }
+
+    @Override
+    public void onPermissionDenied() {
+        ToastUtils.showShort("短信权限拒绝");
+    }
+});
+
+## 集成以下功能
+* 异常崩溃的捕获
+* log日志的本地保存
+* 常用的工具类
+* 多编译环境buildTypes
+* 防止快速点击启动多个页面
+* toolBar封装
+* 权限的封装
+* 封装BaseRecyclerView
 
 
-## 第三方库的使用
-* 网络请求：Retrofit+RxJava+RxAndroid+Lambda，自己封装Retrofit，使用单列，另进行token拦截
-* 图片加载：greenDao
-* 数据库：greenDao（对象关系型数据库）
-* 统计、分享：umeng
-* 布局：ButterKnife、RecyclerView、CardView、Constraint
-* 事件订阅：EventBus
-* 浏览器：腾讯的X5WebView
-
-
-# 优化BaseActivity 2017-8-1
-在BaseActivity中优化，防止快速点击，启动多个Activity
-
-# 优化网络环境  2017-8-11
-优化常量的定义，使用final修饰常量类，并定义私有构造器，防止被初始化
-将网络环境类型抽取为常量，在友盟、日志打印的时候，判断环境的时候不需要使用数字，防止出错
-
-# 优化公共类 2017-11-28
-* 在BaseActivity定义intitView、initData
-* 在app/build.gradle中提取版本号，编译版本引用使用rootProject.ext.buildToolsVersion
-
-# 待优化
-* 网路请求，自动根据编译版本，使用渠道包、增加加载进度条网请求
-
-
-
-
-
+# 关于toolBar的封装 
+* 封装在BaseActivity,优点：不用使用ToolBarUtils，缺点：多封装了一层
